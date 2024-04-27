@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace等于mapper接口类的全限定名,这样实现对应 -->
+<mapper namespace="com.wubai.mapper.UserMapper">
+
+
+<!--    List<User> queryall();-->
+    <select id="queryAll" resultType="com.wubai.entity.User">
+        select * from user
+    </select>
+<!--    int delete(int i);-->
+    <delete id="delete">
+        delete from user where id = #{id}
+    </delete>
+</mapper>

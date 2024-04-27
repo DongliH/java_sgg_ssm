@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="springboot-04-base-durid" />
+        <module name="springboot-01-base-quick" />
+        <module name="springboot-02-base-application" />
+        <module name="springboot-05-base-mybatis" />
+        <module name="springboot-03-base-springmvc-dubug" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="springboot-02-base-application (1)" target="17" />
+      <module name="springboot-02-base-application (2)" target="17" />
+      <module name="springboot-03-base-springmvc" target="17" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="springboot-01-base-quick" options="-parameters" />
+      <module name="springboot-02-base-application" options="-parameters" />
+      <module name="springboot-02-base-application (1)" options="-parameters" />
+      <module name="springboot-02-base-application (2)" options="-parameters" />
+      <module name="springboot-03-base-springmvc" options="-parameters" />
+      <module name="springboot-03-base-springmvc-dubug" options="-parameters" />
+      <module name="springboot-04-base-durid" options="-parameters" />
+      <module name="springboot-05-base-mybatis" options="-parameters" />
+    </option>
+  </component>
+</project>

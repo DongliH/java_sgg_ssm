@@ -1,0 +1,6 @@
+com\wubai\service\UserService.class
+com\wubai\mapper\UserMapper.class
+com\wubai\controller\UserController.class
+com\wubai\advice\LogAdvice.class
+com\wubai\entity\User.class
+com\wubai\Main05.class

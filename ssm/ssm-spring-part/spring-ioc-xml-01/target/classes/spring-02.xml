@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <beans>
+        <!-- 引用类bean声明 -->
+        <bean id="userService" class="com.wubai.ioc_02.UserService">
+            <!-- 构造函数引用 -->
+            <constructor-arg ref="userDao"/>
+        </bean>
+        <!-- 被引用类bean声明 -->
+        <bean id="userDao" class="com.wubai.ioc_02.UserDao"/>
+        <bean id="simpleMovieLister" class="com.wubai.ioc_02.SimpleMovieLister">
+            <!-- setter方法，注入movieFinder对象的标识id
+                 name = 属性名  ref = 引用bean的id值
+             -->
+            <property name="movieFinder" ref="movieFinder" />
+
+            <!-- setter方法，注入基本数据类型movieName
+                 name = 属性名 value= 基本类型值
+             -->
+            <property name="movieName" value="消失的她"/>
+        </bean>
+
+        <bean id="movieFinder" class="com.wubai.ioc_02.MovieFinder"/>
+    </beans>
+
+</beans>

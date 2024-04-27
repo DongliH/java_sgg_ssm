@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="springmvc-01-base-quick" />
+        <module name="springmvc-05-high-other" />
+        <module name="springmvc-02-base-input" />
+        <module name="springmvc-04-base-restful" />
+        <module name="springmvc-03-base-output" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

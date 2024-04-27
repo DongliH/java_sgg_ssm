@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wubai.mapper.EmployeeMapper">
+<!--    List<Employee> queryChoose(@Param("name") String name, @Param("salary") Double salary);-->
+    <select id="queryChoose" resultType="com.wubai.entity.Employee">
+        select * from t_emp
+        where
+        <choose>
+            <when test="name !=null">
+                emp_name=#{name}
+            </when>
+            <when test="salary !=null">
+                emp_salary=#{salary}
+            </when>
+            <otherwise>
+                1=1
+            </otherwise>
+        </choose>
+
+        <!-- prefix属性指定要动态添加的前缀 -->
+        <!-- suffix属性指定要动态添加的后缀 -->
+        <!-- prefixOverrides属性指定要动态去掉的前缀，使用“|”分隔有可能的多个值 -->
+        <!-- suffixOverrides属性指定要动态去掉的后缀，使用“|”分隔有可能的多个值 -->
+        <!-- 当前例子用where标签实现更简洁，但是trim标签更灵活，可以用在任何有需要的地方 -->
+        <trim prefix="where" suffixOverrides="and|or">
+            <if test="name != null">
+                emp_name=#{name} and
+            </if>
+            <if test="salary &gt; 3000">
+                emp_salary>#{salary} and
+            </if>
+
+        </trim>
+    </select>
+<!--    List<Employee> selectEmployeeByConditionTrim(@Param("name") String name, @Param("salary") Double salary);-->
+    <select id="selectEmployeeByConditionTrim" resultType="com.wubai.entity.Employee">
+        select * from t_emp
+
+        <!-- prefix属性指定要动态添加的前缀 -->
+        <!-- suffix属性指定要动态添加的后缀 -->
+        <!-- prefixOverrides属性指定要动态去掉的前缀，使用“|”分隔有可能的多个值 -->
+        <!-- suffixOverrides属性指定要动态去掉的后缀，使用“|”分隔有可能的多个值 -->
+        <!-- 当前例子用where标签实现更简洁，但是trim标签更灵活，可以用在任何有需要的地方 -->
+        <trim prefix="where" suffixOverrides="and|or">
+            <if test="name != null">
+                emp_name=#{name} and
+            </if>
+            <if test="salary &gt; 3000">
+                emp_salary>#{salary} and
+            </if>
+
+        </trim>
+    </select>
+
+
+    <select id="selectEmployeeByCondition" resultType="com.wubai.entity.Employee">
+        select * from t_emp
+        <!-- where标签会自动去掉“标签体内前面多余的and/or” -->
+        <where>
+            <!-- 使用if标签，让我们可以有选择的加入SQL语句的片段。这个SQL语句片段是否要加入整个SQL语句，就看if标签判断的结果是否为true -->
+            <!-- 在if标签的test属性中，可以访问实体类的属性，不可以访问数据库表的字段 -->
+            <if test="name != null">
+                <!-- 在if标签内部，需要访问接口的参数时还是正常写#{} -->
+                or emp_name=#{name}
+            </if>
+            <if test="salary!= null and salary &gt; 100">
+                or emp_salary>#{salary}
+            </if>
+            <!--
+             第一种情况：所有条件都满足 WHERE emp_name=? or emp_salary>?
+             第二种情况：部分条件满足 WHERE emp_salary>?
+             第三种情况：所有条件都不满足 没有where子句
+             -->
+        </where>
+    </select>
+<!--    int update(Employee employee);-->
+    <update id="update">
+        update t_emp
+        <!-- set emp_name=#{empName},emp_salary=#{empSalary} -->
+        <!-- 使用set标签动态管理set子句，并且动态去掉两端多余的逗号 -->
+        <set>
+            <if test="empName != null">
+                emp_name=#{empName},
+            </if>
+            <if test="empSalary &lt; 3000">
+                emp_salary=#{empSalary},
+            </if>
+        </set>
+        where emp_id=#{empId}
+        <!--
+             第一种情况：所有条件都满足 SET emp_name=?, emp_salary=?
+             第二种情况：部分条件满足 SET emp_salary=?
+             第三种情况：所有条件都不满足 update t_emp where emp_id=?
+                没有set子句的update语句会导致SQL语法错误
+         -->
+    </update>
+</mapper>
